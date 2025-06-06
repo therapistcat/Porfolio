@@ -1,0 +1,105 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Slab:wght@700&display=swap');
+
+.home-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 60px 0 40px 0;
+  background: linear-gradient(120deg, #e0e7ff 0%, #f8fafc 100%);
+  font-family: 'Poppins', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-header {
+  text-align: center;
+  font-size: 2.7rem;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #4f46e5;
+  margin-bottom: 36px;
+  position: relative;
+  z-index: 2;
+}
+
+.about-content {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  max-width: 900px;
+  width: 95vw;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(99,102,241,0.10);
+  overflow: hidden;
+  position: relative;
+}
+
+.about-accent {
+  width: 10px;
+  background: linear-gradient(180deg, #6366f1 0%, #60a5fa 100%);
+  border-radius: 24px 0 0 24px;
+}
+
+.about-main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 40px 36px;
+  gap: 40px;
+}
+
+.para {
+  flex: 1;
+  font-size: 1.18rem;
+  color: #22223b;
+  line-height: 1.7;
+  text-align: left;
+  margin: 0;
+  font-family: 'Poppins', Arial, sans-serif;
+  letter-spacing: 0.2px;
+}
+
+.para strong {
+  color: #6366f1;
+  font-weight: 600;
+}
+
+.about-image {
+  width: 260px;
+  height: 260px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 2px 16px rgba(99,102,241,0.12);
+  border: 3px solid #e0e7ff;
+  transition: transform 0.25s cubic-bezier(.4,2,.6,1);
+}
+
+.about-image:hover {
+  transform: scale(1.04) rotate(-2deg);
+  box-shadow: 0 6px 24px rgba(99,102,241,0.18);
+}
+
+/* Responsive for mobile */
+@media (max-width: 900px) {
+  .about-main {
+    flex-direction: column;
+    gap: 24px;
+    padding: 28px 12px;
+  }
+  .about-content {
+    max-width: 98vw;
+    border-radius: 18px;
+  }
+  .about-image {
+    width: 90vw;
+    max-width: 320px;
+    height: auto;
+  }
+  .about-accent {
+    display: none;
+  }
+}

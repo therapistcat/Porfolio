@@ -1,0 +1,123 @@
+/* Skills.css */
+.skills-section {
+  width: 100%;
+  padding: 32px 0;
+  background: #f8fafc;
+}
+
+.skills-header {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #4f46e5;
+  margin-bottom: 32px;
+  letter-spacing: 1.5px;
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px;
+  justify-content: center;
+  align-items: center;
+}
+
+.skill-item {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border-radius: 18px;
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.skill-item:hover {
+  transform: scale(1.09) translateY(-4px);
+  box-shadow: 0 6px 24px rgba(99,102,241,0.13);
+}
+
+.skill-icon-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 62px;
+  height: 62px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  box-shadow: 0 1px 8px #6366f122;
+}
+
+.skill-icon {
+  width: 54px;
+  height: 54px;
+  z-index: 2;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.4s cubic-bezier(.4,2,.6,1);
+}
+
+.skill-item:hover .skill-icon {
+  transform: translate(-50%, -50%) rotate(360deg);
+}
+
+.CircularProgressbar {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.CircularProgressbar-path {
+  stroke-linecap: round;
+  stroke-width: 10px !important;
+}
+
+.CircularProgressbar-trail {
+  stroke-width: 10px !important;
+}
+
+@media (max-width: 900px) {
+  .skills-container {
+    gap: 22px;
+  }
+  .skill-item {
+    width: 90px;
+    height: 90px;
+  }
+  .skill-icon-bg {
+    width: 38px;
+    height: 38px;
+  }
+  .skill-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  .skills-header {
+    font-size: 1.3rem;
+    margin-bottom: 18px;
+  }
+  .skills-container {
+    gap: 12px;
+  }
+  .skill-item {
+    width: 64px;
+    height: 64px;
+  }
+  .skill-icon-bg {
+    width: 22px;
+    height: 22px;
+  }
+  .skill-icon {
+    width: 14px;
+    height: 14px;
+  }
+}

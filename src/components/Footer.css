@@ -1,0 +1,43 @@
+.foot {
+  width: 100%;
+  background: linear-gradient(90deg, #e0e7ff 0%, #f8fafc 100%);
+  padding: 32px 0 18px 0;
+  text-align: center;
+  font-family: 'Poppins', Arial, sans-serif;
+  margin-top: 40px;
+  border-top: 1.5px solid #e0e7ff;
+}
+
+.footer-suggestions h3 {
+  color: #4f46e5;
+  font-size: 1.3rem;
+  font-family: 'Roboto Slab', serif;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.footer-suggestions p {
+  color: #3730a3;
+  font-size: 1.05rem;
+  margin-bottom: 10px;
+}
+
+.footer-link {
+  color: #6366f1;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+  margin: 0 4px;
+}
+
+.footer-link:hover {
+  color: #60a5fa;
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  color: #6b7280;
+  font-size: 0.98rem;
+  margin-top: 10px;
+  letter-spacing: 0.5px;
+}
