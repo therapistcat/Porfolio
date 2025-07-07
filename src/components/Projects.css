@@ -58,17 +58,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden; /* Prevents glass from overflowing */
 }
 
 .project-img-glass {
   background: rgba(255,255,255,0.55);
   border-radius: 50%;
   box-shadow: 0 8px 32px #6366f122, 0 1.5px 8px #6366f122;
-  padding: 22px;
+  padding: 0; /* Remove extra padding */
   display: flex;
   align-items: center;
   justify-content: center;
   transition: box-shadow 0.3s, transform 0.3s;
+  overflow: hidden;
 }
 
 .project-img-glass:hover {
@@ -79,11 +81,12 @@
 .project-img-main {
   width: 140px;
   height: 140px;
-  object-fit: contain;
-  border-radius: 50%;
+  object-fit: cover;      /* Ensures image fills the circle */
+  border-radius: 50%;     /* Perfect circle */
   background: #f8fafc;
   border: 2.5px solid #e0e7ff;
   box-shadow: 0 2px 12px #6366f122;
+  display: block;
 }
 
 .project-card {
@@ -125,7 +128,7 @@
   width: 100%;
   height: 100%;
   border-radius: 24px;
-  background: rgba(255,255,255,0.92);
+  background: #fff; /* Solid white for best contrast */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -136,10 +139,18 @@
   z-index: 2;
 }
 
+.card-back {
+  background: linear-gradient(120deg, #6366f1 0%, #60a5fa 100%);
+  color: #fff;
+}
+
 .card-front {
   font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
   padding-top: 32px;
   padding-bottom: 32px;
+  overflow: hidden; /* Prevents desc background from overflowing */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .card-front h3 {
@@ -174,12 +185,16 @@
   font-weight: 500;
   margin-top: 10px;
   margin-bottom: 10px;
-  background: rgba(99,102,241,0.06);
-  border-radius: 12px;
-  padding: 18px 22px;
+  background: #f1f5ff; /* Lighter, more solid background */
+  color: #22223b;      /* Dark text for contrast */
+  border-radius: 10px;
+  padding: 14px 18px;
   box-shadow: 0 2px 12px #6366f111;
   letter-spacing: 0.2px;
   transition: background 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
 }
 
 .desc-highlight {
@@ -243,49 +258,122 @@
   background: rgba(99,102,241,0.22);
 }
 
+.project-link-btn {
+  display: inline-block;
+  margin: 24px auto 0 auto;      /* More space above, centered horizontally */
+  padding: 12px 32px;            /* Thicker button */
+  background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;           /* More rounded */
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 16px #6366f122;
+  transition: background 0.2s, transform 0.18s, box-shadow 0.18s;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+}
+
+.project-link-btn:hover {
+  background: linear-gradient(90deg, #60a5fa 0%, #6366f1 100%);
+  transform: translateY(-3px) scale(1.07);
+  box-shadow: 0 8px 24px #6366f144;
+}
+
+/* --- Responsive improvements --- */
+@media (max-width: 1100px) {
+  .projects-container {
+    max-width: 100vw;
+    padding: 0 1vw;
+    gap: 64px;
+  }
+  .project-card {
+    width: 98vw;
+    max-width: 98vw;
+    min-width: 0;
+  }
+}
+
 @media (max-width: 900px) {
   .projects-container {
-    gap: 48px;
+    gap: 32px;
+    padding: 0 1vw;
   }
   .project-row {
     flex-direction: column !important;
     gap: 18px;
+    align-items: center;
   }
   .project-card {
-    width: 97vw;
-    max-width: 420px;
-    height: 220px;
+    width: 98vw;
+    max-width: 98vw;
+    min-width: 0;
+    height: auto;
+    min-height: 180px;
+    margin: 0 auto;
+  }
+  .project-image-col {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 8px;
   }
   .project-img-main {
-    width: 90px;
-    height: 90px;
+    width: 80px;
+    height: 80px;
   }
   .project-img-glass {
-    padding: 10px;
+    padding: 8px;
   }
   .card-front, .card-back {
     padding: 18px 8px;
+  }
+  .project-link-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px 0;
+    margin-top: 18px;
   }
 }
 
 @media (max-width: 600px) {
   .projects-header {
-    font-size: 1.3rem;
-    margin-bottom: 18px;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+  .projects-section {
+    padding: 24px 0 16px 0;
   }
   .project-card {
     width: 99vw;
     max-width: 99vw;
-    height: 170px;
+    min-width: 0;
+    min-height: 120px;
+    height: auto;
   }
   .project-img-main {
-    width: 60px;
-    height: 60px;
+    width: 48px;
+    height: 48px;
   }
   .project-img-glass {
-    padding: 4px;
+    padding: 2px;
   }
   .card-front, .card-back {
-    padding: 10px 2px;
+    padding: 8px 2px;
   }
+  .project-desc {
+    font-size: 0.98rem;
+    padding: 7px 4px;
+  }
+  .project-link-btn {
+    font-size: 0.98rem;
+    padding: 10px 0;
+    margin-top: 10px;
+  }
+}
+
+/* --- Extra: Prevent horizontal scroll on mobile --- */
+body {
+  overflow-x: hidden;
 }

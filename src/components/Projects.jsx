@@ -11,7 +11,8 @@ const projectsData = [
       </>
     ),
     details: "Built with React, Node.js, and Chart.js. Features authentication, export options, and customizable categories for smarter financial planning.",
-    frameworks: ["React", "Node.js", "Chart.js"]
+    frameworks: ["React", "Node.js", "Chart.js"],
+    link: "https://your-financial-dashboard-demo.com"
   },
   {
     title: "Smart Study Scheduler",
@@ -22,7 +23,8 @@ const projectsData = [
       </>
     ),
     details: "Uses React, Flask, and MongoDB. Integrates reminders, adaptive scheduling, productivity analytics, and a smart calendar that adjusts to your learning pace.",
-    frameworks: ["React", "Flask", "MongoDB"]
+    frameworks: ["React", "Flask", "MongoDB"],
+    link: "https://your-smart-study-scheduler-demo.com"
   },
   {
     title: "IoT Home Automation",
@@ -33,7 +35,8 @@ const projectsData = [
       </>
     ),
     details: "Developed with React, Node.js, and MQTT. Supports real-time device status, automation rules, notifications, and secure remote access for smart homes.",
-    frameworks: ["React", "Node.js", "MQTT"]
+    frameworks: ["React", "Node.js", "MQTT"],
+    link: "https://your-iot-home-automation-demo.com"
   }
 ]
 
@@ -57,6 +60,14 @@ const Projects = () => {
                 <div className={`card-front ${idx % 2 === 1 ? 'align-right' : 'align-left'}`}>
                   <h3>{project.title}</h3>
                   <div className="project-desc">{project.description}</div>
+                  <a
+                    href={project.link}
+                    className="project-link-btn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View Project
+                  </a>
                 </div>
                 <div className="card-back">
                   <h4>Details</h4>
@@ -66,6 +77,14 @@ const Projects = () => {
                       <span className="framework" key={i}>{fw}</span>
                     ))}
                   </div>
+                  <a
+                    href={project.link}
+                    className="project-link-btn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View Project
+                  </a>
                 </div>
               </div>
             </div>
