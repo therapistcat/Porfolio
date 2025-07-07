@@ -8,10 +8,6 @@ import { useEffect } from 'react'
 function App() {
 
   useEffect(() => {
-    // Only show follower on non-touch devices
-    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0
-    if (isTouch) return
-
     const follower = document.createElement('div')
     follower.className = 'cursor-follower'
     document.body.appendChild(follower)
@@ -26,21 +22,34 @@ function App() {
       mouseY = e.clientY
     }
 
-    // Animate the follower with a much slower trailing effect
+    const moveTouchFollower = (e) => {
+      if (e.touches && e.touches[0]) {
+        mouseX = e.touches[0].clientX
+        mouseY = e.touches[0].clientY
+      }
+    }
+
+    // Animate the follower with smooth trailing effect
     const animate = () => {
-      currentX += (mouseX - currentX) * 0.04 // SLOW trailing
-      currentY += (mouseY - currentY) * 0.04
+      currentX += (mouseX - currentX) * 0.1 // Smooth trailing
+      currentY += (mouseY - currentY) * 0.1
       follower.style.left = `${currentX}px`
       follower.style.top = `${currentY}px`
       requestAnimationFrame(animate)
     }
 
     window.addEventListener('mousemove', moveFollower)
+    window.addEventListener('touchmove', moveTouchFollower)
+    window.addEventListener('touchstart', moveTouchFollower)
     animate()
 
     return () => {
       window.removeEventListener('mousemove', moveFollower)
-      document.body.removeChild(follower)
+      window.removeEventListener('touchmove', moveTouchFollower)
+      window.removeEventListener('touchstart', moveTouchFollower)
+      if (document.body.contains(follower)) {
+        document.body.removeChild(follower)
+      }
     }
   }, [])
 
