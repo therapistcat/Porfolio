@@ -1,27 +1,121 @@
 import React from 'react'
-import "./Home.css"
+import './Home.css'
 
 const Home = () => {
   return (
-    <div className="home-container" id="home">
-      <h1 className='about-header'>ABOUT</h1>
-      <div className="about-content">
-        <div className="about-accent"></div>
-        <div className="about-main">
-          <p className="para">
-            I'm <strong>Jivanshu Mishra</strong>, an 18-year-old Computer Engineering student at DJ Sanghvi College, specializing in IoT, Cybersecurity, and Blockchain.<br /><br />
-            I'm a <strong>full-stack developer</strong> skilled in the MERN stack and Flask, currently focused on building practical projects like a smart study scheduler and a financial dashboard.<br /><br />
-            I’m also passionate about IoT systems, exploring how hardware and software interact. With a solid base in DSA, I enjoy solving problems and turning ideas into efficient solutions.<br /><br />
-            Outside tech, I love mentoring kids in science, staying fit, and watching story-driven shows and games like <strong>Peaky Blinders</strong> and <strong>Ghost of Tsushima</strong>.
+    <section className="home-section" id="home">
+      <div className="home-container">
+
+        {/* Hero Section */}
+        <div className="hero-section">
+          <h1 className="hero-title">
+            Hello, I'm Jivanshu
+          </h1>
+          <p className="hero-subtitle">
+            Computer Engineering Student • Full-Stack Developer • IoT Enthusiast
           </p>
-          <img
-            src="https://static.wikia.nocookie.net/chhotabheem/images/7/7e/Placeholder.jpeg/revision/latest/scale-to-width-down/1000?cb=20211108091929"
-            alt="meri photo"
-            className="about-image"
-          />
+        </div>
+
+        {/* About Section */}
+        <div className="about-section">
+
+          {/* Content */}
+          <div className="about-content">
+            <div className="about-badge">
+              <span className="badge-dot"></span>
+              About Me
+            </div>
+
+            <h2 className="about-title">
+              Passionate about creating
+              <span className="text-gradient"> innovative solutions</span>
+            </h2>
+
+            <div className="about-text">
+              <p>
+                I'm an <span className="highlight-dark">18-year-old Computer Engineering student</span> at
+                DJ Sanghvi College, specializing in <span className="highlight-blue">IoT, Cybersecurity, and Blockchain</span>.
+              </p>
+
+              <p>
+                As a <span className="highlight-dark">full-stack developer</span> skilled in the
+                <span className="highlight-green"> MERN stack</span> and
+                <span className="highlight-purple"> Flask</span>, I'm currently focused on building
+                practical projects like a smart study scheduler and a financial dashboard.
+              </p>
+
+              <p>
+                I'm passionate about <span className="highlight-orange">IoT systems</span>, exploring how
+                hardware and software interact. With a solid foundation in
+                <span className="highlight-dark"> Data Structures & Algorithms</span>, I enjoy solving
+                complex problems and turning innovative ideas into efficient solutions.
+              </p>
+
+              <p>
+                Outside of tech, I love mentoring kids in science, staying fit, and enjoying story-driven content like
+                <span className="highlight-dark"> Peaky Blinders</span> and
+                <span className="highlight-dark"> Ghost of Tsushima</span>.
+              </p>
+            </div>
+
+            {/* Stats */}
+            <div className="stats-section">
+              <div className="stat-item">
+                <div className="stat-number blue">18</div>
+                <div className="stat-label">Years Old</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-number green">10+</div>
+                <div className="stat-label">Technologies</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-number purple">5+</div>
+                <div className="stat-label">Projects</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Image */}
+          <div className="about-image-section">
+            <div className="image-container">
+              <div className="image-background"></div>
+
+              <div className="image-wrapper">
+                <img
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
+                  alt="Jivanshu Mishra"
+                  className="profile-image"
+                />
+                <div className="image-overlay"></div>
+              </div>
+
+              {/* Floating elements */}
+              <div className="floating-dot dot-1"></div>
+              <div className="floating-dot dot-2"></div>
+              <div className="floating-dot dot-3"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Call to Action */}
+        <div className="cta-section">
+          <div className="cta-buttons">
+            <button
+              onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}
+              className="btn-primary"
+            >
+              View My Work
+            </button>
+            <button
+              onClick={() => document.getElementById('skills').scrollIntoView({ behavior: 'smooth' })}
+              className="btn-secondary"
+            >
+              My Skills
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
