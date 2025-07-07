@@ -23,7 +23,7 @@ const Footer = () => {
             <h3 className="brand-title">Jivanshu Mishra</h3>
             <p className="brand-description">
               Computer Engineering student passionate about creating innovative solutions
-              through full-stack development, IoT, and emerging technologies.
+              through full-stack development, Blockchain, and emerging technologies.
             </p>
             <div className="social-links">
               <a href="https://github.com/therapistcat" target="_blank" rel="noopener noreferrer" className="social-link">

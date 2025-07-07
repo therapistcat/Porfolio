@@ -12,7 +12,7 @@ const Home = () => {
             Hello, I'm Jivanshu
           </h1>
           <p className="hero-subtitle">
-            Computer Engineering Student • Full-Stack Developer • IoT Enthusiast
+            Computer Engineering Student • Full-Stack Developer • Blockchain Enthusiast
           </p>
         </div>
 
@@ -34,7 +34,7 @@ const Home = () => {
             <div className="about-text">
               <p>
                 I'm an <span className="highlight-dark">18-year-old Computer Engineering student</span> at
-                DJ Sanghvi College, specializing in <span className="highlight-blue">IoT, Cybersecurity, and Blockchain</span>.
+                DJ Sanghvi College, specializing in <span className="highlight-blue">Blockchain, Cybersecurity, and Web3</span>.
               </p>
 
               <p>
@@ -45,16 +45,16 @@ const Home = () => {
               </p>
 
               <p>
-                I'm passionate about <span className="highlight-orange">IoT systems</span>, exploring how
-                hardware and software interact. With a solid foundation in
+                I'm passionate about <span className="highlight-orange">Blockchain technology</span>, exploring how
+                decentralized systems can revolutionize industries. With a solid foundation in
                 <span className="highlight-dark"> Data Structures & Algorithms</span>, I enjoy solving
                 complex problems and turning innovative ideas into efficient solutions.
               </p>
 
               <p>
-                Outside of tech, I love mentoring kids in science, staying fit, and enjoying story-driven content like
-                <span className="highlight-dark"> Peaky Blinders</span> and
-                <span className="highlight-dark"> Ghost of Tsushima</span>.
+                Outside of tech, I love mentoring kids in science, staying fit, and exploring new technologies.
+                I'm always eager to learn about emerging trends in <span className="highlight-dark">Web3</span> and
+                <span className="highlight-dark">decentralized applications</span>.
               </p>
             </div>
 

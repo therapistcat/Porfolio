@@ -19,12 +19,12 @@ const projectsData = [
     demo: "https://study-scheduler-demo.vercel.app",
   },
   {
-    title: "IoT Home Automation",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop",
-    description: "A comprehensive IoT solution for smart home automation with real-time device control and monitoring capabilities.",
-    frameworks: ["React", "Node.js", "MQTT", "Arduino"],
-    github: "https://github.com/therapistcat/iot-home",
-    demo: "https://iot-home-demo.vercel.app",
+    title: "Blockchain Voting System",
+    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop",
+    description: "A decentralized voting platform built on blockchain technology ensuring transparency, security, and immutable vote records.",
+    frameworks: ["React", "Solidity", "Web3.js", "Ethereum"],
+    github: "https://github.com/therapistcat/blockchain-voting",
+    demo: "https://blockchain-voting-demo.vercel.app",
   }
 ]
 
@@ -44,7 +44,7 @@ const Projects = () => {
             <span className="text-gradient"> Work</span>
           </h2>
           <p className="projects-subtitle">
-            A showcase of projects that demonstrate my skills in full-stack development, IoT, and modern web technologies.
+            A showcase of projects that demonstrate my skills in full-stack development, Blockchain, and modern web technologies.
           </p>
         </div>
 
