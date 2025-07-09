@@ -1,0 +1,141 @@
+.sound-toggle {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .sound-toggle {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(51, 65, 85, 0.3);
+}
+
+.sound-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.dark .sound-toggle:hover {
+  background: rgba(15, 23, 42, 0.9);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.sound-toggle.enabled {
+  color: #22c55e;
+}
+
+.sound-toggle.disabled {
+  color: #ef4444;
+}
+
+.sound-icon {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.sound-toggle:active .sound-icon {
+  transform: scale(0.9);
+}
+
+/* Sound waves animation */
+.sound-waves {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sound-waves.active {
+  opacity: 1;
+}
+
+.wave {
+  position: absolute;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  opacity: 0;
+  animation: soundWave 2s infinite ease-out;
+}
+
+.wave-1 {
+  width: 30px;
+  height: 30px;
+  animation-delay: 0s;
+}
+
+.wave-2 {
+  width: 40px;
+  height: 40px;
+  animation-delay: 0.3s;
+}
+
+.wave-3 {
+  width: 50px;
+  height: 50px;
+  animation-delay: 0.6s;
+}
+
+@keyframes soundWave {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+/* Pulse effect when toggled */
+.sound-toggle::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  background: currentColor;
+  border-radius: 16px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+}
+
+.sound-toggle:active::before {
+  opacity: 0.2;
+  transform: scale(1);
+}
+
+/* Focus state */
+.sound-toggle:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sound-toggle {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .sound-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}

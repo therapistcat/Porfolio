@@ -1,0 +1,205 @@
+.card-3d-container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.card-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+.card-3d.with-shadow {
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.15));
+}
+
+.dark .card-3d.with-shadow {
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.4));
+}
+
+.card-3d-glow {
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(
+    circle at 50% 50%, 
+    rgba(59, 130, 246, 0.3) 0%, 
+    rgba(139, 92, 246, 0.2) 50%, 
+    transparent 100%
+  );
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease, background 0.2s ease;
+  z-index: -1;
+  filter: blur(20px);
+}
+
+.dark .card-3d-glow {
+  background: radial-gradient(
+    circle at 50% 50%, 
+    rgba(96, 165, 250, 0.4) 0%, 
+    rgba(167, 139, 250, 0.3) 50%, 
+    transparent 100%
+  );
+}
+
+.card-3d-content {
+  position: relative;
+  z-index: 1;
+  border-radius: inherit;
+  overflow: hidden;
+  background: inherit;
+  height: 100%;
+  width: 100%;
+}
+
+/* Enhanced 3D effects for specific elements */
+.card-3d-enhanced {
+  transform-style: preserve-3d;
+}
+
+.card-3d-enhanced::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.dark .card-3d-enhanced::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+}
+
+.card-3d:hover .card-3d-enhanced::before {
+  opacity: 0.7;
+}
+
+/* Floating animation for 3D cards */
+.card-3d-float {
+  animation: float3D 6s ease-in-out infinite;
+}
+
+@keyframes float3D {
+  0%, 100% {
+    transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotateX(2deg) rotateY(1deg);
+  }
+  50% {
+    transform: translateY(-5px) rotateX(0deg) rotateY(-1deg);
+  }
+  75% {
+    transform: translateY(-15px) rotateX(-1deg) rotateY(2deg);
+  }
+}
+
+/* Depth layers for enhanced 3D effect */
+.card-3d-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.card-3d-layer-1 {
+  background: rgba(59, 130, 246, 0.1);
+  transform: translateZ(5px);
+}
+
+.card-3d-layer-2 {
+  background: rgba(139, 92, 246, 0.1);
+  transform: translateZ(10px);
+}
+
+.card-3d-layer-3 {
+  background: rgba(236, 72, 153, 0.1);
+  transform: translateZ(15px);
+}
+
+.dark .card-3d-layer-1 {
+  background: rgba(96, 165, 250, 0.1);
+}
+
+.dark .card-3d-layer-2 {
+  background: rgba(167, 139, 250, 0.1);
+}
+
+.dark .card-3d-layer-3 {
+  background: rgba(244, 114, 182, 0.1);
+}
+
+/* Holographic effect */
+.card-3d-holographic {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-3d-holographic::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.card-3d:hover .card-3d-holographic::after {
+  transform: translateX(100%) translateY(100%) rotate(45deg);
+}
+
+/* Disable 3D effects on mobile for performance */
+@media (max-width: 768px) {
+  .card-3d {
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  .card-3d-glow {
+    display: none;
+  }
+  
+  .card-3d-float {
+    animation: none;
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .card-3d {
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  .card-3d-float {
+    animation: none !important;
+  }
+  
+  .card-3d-glow {
+    display: none;
+  }
+}

@@ -1,19 +1,45 @@
 import React from 'react'
+import TypewriterEffect from './TypewriterEffect'
+import ParticleBackground from './ParticleBackground'
+import GitHubStats from './GitHubStats'
 import './Home.css'
 
 const Home = () => {
+  const typewriterTexts = [
+    "Full-Stack Developer",
+    "Blockchain Enthusiast",
+    "Problem Solver",
+    "Tech Innovator"
+  ]
+
   return (
     <section className="home-section" id="home">
+      <ParticleBackground />
       <div className="home-container">
 
         {/* Hero Section */}
         <div className="hero-section">
-          <h1 className="hero-title">
-            Hello, I'm Jivanshu
-          </h1>
-          <p className="hero-subtitle">
-            Computer Engineering Student • Full-Stack Developer • Blockchain Enthusiast
-          </p>
+          <div className="hero-content">
+            <h1 className="hero-title">
+              Hello, I'm <span className="hero-name">Jivanshu</span>
+            </h1>
+            <div className="hero-subtitle">
+              <span className="subtitle-text">Computer Engineering Student • </span>
+              <TypewriterEffect texts={typewriterTexts} speed={80} deleteSpeed={40} pauseTime={1500} />
+            </div>
+            <p className="hero-description">
+              Passionate about creating innovative solutions through modern web technologies,
+              blockchain development, and cutting-edge software engineering.
+            </p>
+          </div>
+
+          {/* Floating Elements */}
+          <div className="floating-elements">
+            <div className="floating-shape shape-1"></div>
+            <div className="floating-shape shape-2"></div>
+            <div className="floating-shape shape-3"></div>
+            <div className="floating-shape shape-4"></div>
+          </div>
         </div>
 
         {/* About Section */}
@@ -113,6 +139,11 @@ const Home = () => {
               My Skills
             </button>
           </div>
+        </div>
+
+        {/* GitHub Stats Section */}
+        <div className="github-stats-section">
+          <GitHubStats />
         </div>
       </div>
     </section>

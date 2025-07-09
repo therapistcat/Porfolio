@@ -1,0 +1,43 @@
+.shake-element {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.shake-light {
+  animation: shakeLightAnimation 0.5s ease-in-out;
+}
+
+.shake-medium {
+  animation: shakeMediumAnimation 0.5s ease-in-out;
+}
+
+.shake-strong {
+  animation: shakeStrongAnimation 0.5s ease-in-out;
+}
+
+@keyframes shakeLightAnimation {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+  20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+@keyframes shakeMediumAnimation {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes shakeStrongAnimation {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+  20%, 40%, 60%, 80% { transform: translateX(10px); }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .shake-light,
+  .shake-medium,
+  .shake-strong {
+    animation: none !important;
+  }
+}

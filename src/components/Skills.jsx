@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useAchievements } from '../contexts/AchievementContext'
 import './Skills.css'
 
 const skillCategories = [
@@ -104,10 +105,19 @@ const skillCategories = [
 ]
 
 const Skills = () => {
+  const { trackSectionVisit, trackSkillCategoryView } = useAchievements()
+
+  useEffect(() => {
+    trackSectionVisit('skills')
+  }, [trackSectionVisit])
+
+  const handleCategoryView = (categoryTitle) => {
+    trackSkillCategoryView(categoryTitle)
+  }
+
   return (
     <section className="skills-section" id="skills">
       <div className="skills-container">
-
         {/* Header */}
         <div className="skills-header">
           <div className="skills-badge">
@@ -126,7 +136,11 @@ const Skills = () => {
         {/* Skills Categories */}
         <div className="skills-categories">
           {skillCategories.map((category, categoryIndex) => (
-            <div key={category.title} className="skill-category">
+            <div
+              key={category.title}
+              className="skill-category"
+              onMouseEnter={() => handleCategoryView(category.title)}
+            >
               <div className="category-header">
                 <h3 className="category-title">{category.title}</h3>
                 <div className="category-line"></div>
@@ -136,16 +150,23 @@ const Skills = () => {
                 {category.skills.map((skill, skillIndex) => (
                   <div
                     key={skill.name}
-                    className="skill-card"
-                    style={{ '--delay': `${(categoryIndex * 4 + skillIndex) * 0.1}s` }}
+                    className="skill-card modern-card"
+                    style={{
+                      '--delay': `${(categoryIndex * 4 + skillIndex) * 0.1}s`,
+                      '--skill-color': skill.color
+                    }}
                   >
                     {/* Skill Icon */}
                     <div className="skill-icon-container">
-                      <div className="skill-icon-bg" style={{ '--skill-color': skill.color }}>
+                      <div className="skill-icon-bg">
                         <img
                           src={skill.icon}
                           alt={skill.name}
                           className="skill-icon"
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                            e.target.parentElement.innerHTML = `<span class="skill-fallback-icon">${skill.name.charAt(0)}</span>`;
+                          }}
                         />
                       </div>
                     </div>
@@ -161,8 +182,7 @@ const Skills = () => {
                           <div
                             className="skill-progress-fill"
                             style={{
-                              '--progress': `${skill.level}%`,
-                              '--skill-color': skill.color
+                              '--progress': `${skill.level}%`
                             }}
                           ></div>
                         </div>
@@ -170,8 +190,8 @@ const Skills = () => {
                       </div>
                     </div>
 
-                    {/* Hover Effect */}
-                    <div className="skill-card-glow" style={{ '--skill-color': skill.color }}></div>
+                    {/* Hover Glow Effect */}
+                    <div className="skill-card-glow"></div>
                   </div>
                 ))}
               </div>

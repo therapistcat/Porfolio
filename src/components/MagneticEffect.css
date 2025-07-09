@@ -1,0 +1,24 @@
+.magnetic-element {
+  cursor: pointer;
+  will-change: transform;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.magnetic-element:hover {
+  z-index: 10;
+}
+
+/* Disable magnetic effect on mobile for performance */
+@media (max-width: 768px) {
+  .magnetic-element {
+    transform: none !important;
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .magnetic-element {
+    transform: none !important;
+    transition: none !important;
+  }
+}

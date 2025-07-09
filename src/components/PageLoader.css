@@ -1,0 +1,290 @@
+.page-loader {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.dark .page-loader {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.loader-content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Logo Animation */
+.loader-logo {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.logo-circle {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  position: relative;
+  z-index: 3;
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+.dark .logo-circle {
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+}
+
+.logo-text {
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+}
+
+.logo-rings {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring {
+  position: absolute;
+  border: 2px solid transparent;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+}
+
+.dark .ring {
+  border-top-color: #60a5fa;
+}
+
+.ring-1 {
+  width: 100px;
+  height: 100px;
+  animation-duration: 2s;
+}
+
+.ring-2 {
+  width: 120px;
+  height: 120px;
+  animation-duration: 3s;
+  animation-direction: reverse;
+  border-top-color: #8b5cf6;
+}
+
+.dark .ring-2 {
+  border-top-color: #a78bfa;
+}
+
+.ring-3 {
+  width: 140px;
+  height: 140px;
+  animation-duration: 4s;
+  border-top-color: #ec4899;
+}
+
+.dark .ring-3 {
+  border-top-color: #f472b6;
+}
+
+/* Progress Bar */
+.loader-progress {
+  margin-bottom: 2rem;
+}
+
+.progress-bar {
+  width: 200px;
+  height: 4px;
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: 2px;
+  margin: 0 auto 1rem;
+  overflow: hidden;
+}
+
+.dark .progress-bar {
+  background: rgba(96, 165, 250, 0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.dark .progress-fill {
+  background: linear-gradient(90deg, #60a5fa, #a78bfa, #f472b6);
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6));
+  animation: shimmer 1.5s infinite;
+}
+
+.progress-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.dark .progress-text {
+  color: #94a3b8;
+}
+
+/* Loading Text */
+.loader-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.loading-word {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.dark .loading-word {
+  color: #cbd5e1;
+}
+
+.loading-dots {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: #3b82f6;
+  border-radius: 50%;
+  animation: dotBounce 1.4s infinite ease-in-out;
+}
+
+.dark .dot {
+  background: #60a5fa;
+}
+
+.dot:nth-child(1) { animation-delay: -0.32s; }
+.dot:nth-child(2) { animation-delay: -0.16s; }
+.dot:nth-child(3) { animation-delay: 0s; }
+
+/* Particles */
+.loader-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #3b82f6;
+  border-radius: 50%;
+  left: var(--x);
+  top: var(--y);
+  animation: particleFloat 4s infinite ease-in-out;
+  animation-delay: var(--delay);
+  opacity: 0.6;
+}
+
+.dark .particle {
+  background: #60a5fa;
+}
+
+/* Animations */
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes dotBounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-20px);
+    opacity: 0.6;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .logo-circle {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .logo-text {
+    font-size: 1.5rem;
+  }
+  
+  .ring-1 {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .ring-2 {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .ring-3 {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .progress-bar {
+    width: 150px;
+  }
+}

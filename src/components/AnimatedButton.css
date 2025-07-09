@@ -1,0 +1,227 @@
+.animated-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  user-select: none;
+}
+
+.animated-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Button Content */
+.btn-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+/* Ripple Effect */
+.btn-ripple {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.6s ease;
+  z-index: 1;
+}
+
+.animated-btn:active .btn-ripple {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 0.3s ease;
+}
+
+/* Glow Effect */
+.btn-glow {
+  position: absolute;
+  inset: -2px;
+  background: inherit;
+  border-radius: inherit;
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.animated-btn:hover .btn-glow {
+  opacity: 0.6;
+}
+
+/* Variants */
+.animated-btn--primary {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: white;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+}
+
+.dark .animated-btn--primary {
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  box-shadow: 0 4px 15px rgba(96, 165, 250, 0.2);
+}
+
+.animated-btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+}
+
+.dark .animated-btn--primary:hover {
+  box-shadow: 0 8px 25px rgba(96, 165, 250, 0.3);
+}
+
+.animated-btn--secondary {
+  background: rgba(255, 255, 255, 0.8);
+  color: #374151;
+  border: 2px solid #e5e7eb;
+  backdrop-filter: blur(10px);
+}
+
+.dark .animated-btn--secondary {
+  background: rgba(30, 41, 59, 0.8);
+  color: #d1d5db;
+  border: 2px solid #374151;
+}
+
+.animated-btn--secondary:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: #3b82f6;
+  color: #3b82f6;
+  transform: translateY(-2px);
+}
+
+.dark .animated-btn--secondary:hover {
+  background: rgba(96, 165, 250, 0.1);
+  border-color: #60a5fa;
+  color: #60a5fa;
+}
+
+.animated-btn--ghost {
+  background: transparent;
+  color: #3b82f6;
+  border: 2px solid #3b82f6;
+}
+
+.dark .animated-btn--ghost {
+  color: #60a5fa;
+  border-color: #60a5fa;
+}
+
+.animated-btn--ghost:hover {
+  background: #3b82f6;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+}
+
+.dark .animated-btn--ghost:hover {
+  background: #60a5fa;
+  color: #0f172a;
+  box-shadow: 0 8px 25px rgba(96, 165, 250, 0.3);
+}
+
+/* Sizes */
+.animated-btn--small {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  border-radius: 8px;
+}
+
+.animated-btn--medium {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+.animated-btn--large {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  border-radius: 16px;
+}
+
+/* Hover Effects */
+.animated-btn:hover .btn-content {
+  transform: translateY(-1px);
+}
+
+.animated-btn:active .btn-content {
+  transform: translateY(0);
+}
+
+/* Special Effects */
+.animated-btn--primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.animated-btn--primary:hover::before {
+  opacity: 1;
+}
+
+/* Focus States */
+.animated-btn:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.dark .animated-btn:focus-visible {
+  outline-color: #60a5fa;
+}
+
+/* Loading State */
+.animated-btn--loading {
+  pointer-events: none;
+}
+
+.animated-btn--loading .btn-content {
+  opacity: 0.7;
+}
+
+.animated-btn--loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 3;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .animated-btn--large {
+    padding: 0.875rem 1.75rem;
+    font-size: 1rem;
+  }
+  
+  .animated-btn--medium {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.95rem;
+  }
+}
