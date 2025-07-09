@@ -86,10 +86,26 @@ const Navbar = () => {
 
         {/* Mobile Navigation Menu */}
         <div className={`mobile-nav ${isMobileMenuOpen ? 'active' : ''}`}>
-          <button onClick={() => handleScroll('home')} className="mobile-nav-link">About</button>
-          <button onClick={() => handleScroll('skills')} className="mobile-nav-link">Skills</button>
-          <button onClick={() => handleScroll('projects')} className="mobile-nav-link">Projects</button>
+          <div className="mobile-nav-links">
+            <button onClick={() => handleScroll('home')} className="mobile-nav-link">About</button>
+            <button onClick={() => handleScroll('skills')} className="mobile-nav-link">Skills</button>
+            <button onClick={() => handleScroll('projects')} className="mobile-nav-link">Projects</button>
+            <button onClick={() => handleScroll('contact')} className="mobile-nav-link">Contact</button>
+          </div>
 
+          {/* Mobile Controls */}
+          <div className="mobile-controls">
+            <div className="mobile-control-row">
+              <span className="control-label">🔊 Sound</span>
+              <SoundToggle />
+            </div>
+            <div className="mobile-control-row">
+              <span className="control-label">🌙 Theme</span>
+              <ThemeToggle />
+            </div>
+          </div>
+
+          {/* Mobile Social Links */}
           <div className="mobile-socials">
             <a href="https://wa.me/918928411910?text=Hello%20Jivanshu!" target="_blank" rel="noopener noreferrer" className="social-link">
               <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
@@ -109,6 +125,8 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
+
     </nav>
   )
 }

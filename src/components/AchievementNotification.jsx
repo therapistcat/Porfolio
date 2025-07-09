@@ -47,8 +47,12 @@ const AchievementNotification = () => {
 
           <div className="achievement-content">
             <div className="achievement-header">
-              <span className="achievement-badge">🎉 Achievement Unlocked!</span>
-              <span className="achievement-points">+{notification.achievement.points} pts</span>
+              <span className="achievement-badge">
+                {notification.achievement.points >= 50 ? '🏆 Legendary Achievement!' :
+                 notification.achievement.points >= 30 ? '⭐ Epic Achievement!' :
+                 '🎉 Achievement Unlocked!'}
+              </span>
+              <span className="achievement-points">+{notification.achievement.points} XP</span>
             </div>
             <div className="achievement-title">
               {notification.achievement.title}

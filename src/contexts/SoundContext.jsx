@@ -74,6 +74,26 @@ export const SoundProvider = ({ children }) => {
     setTimeout(() => createTone(784, 0.3, 'sine'), 200) // G5
   }
 
+  const playEpicSuccess = () => {
+    // Epic achievement sound (like RDR2 challenge complete)
+    createTone(440, 0.15, 'sine') // A4
+    setTimeout(() => createTone(523, 0.15, 'sine'), 150) // C5
+    setTimeout(() => createTone(659, 0.15, 'sine'), 300) // E5
+    setTimeout(() => createTone(784, 0.2, 'sine'), 450) // G5
+    setTimeout(() => createTone(880, 0.25, 'sine'), 600) // A5
+  }
+
+  const playLegendarySuccess = () => {
+    // Legendary achievement sound (like TLOU trophy unlock)
+    createTone(330, 0.1, 'sine') // E4
+    setTimeout(() => createTone(440, 0.1, 'sine'), 100) // A4
+    setTimeout(() => createTone(523, 0.1, 'sine'), 200) // C5
+    setTimeout(() => createTone(659, 0.15, 'sine'), 300) // E5
+    setTimeout(() => createTone(784, 0.15, 'sine'), 450) // G5
+    setTimeout(() => createTone(880, 0.2, 'sine'), 600) // A5
+    setTimeout(() => createTone(1047, 0.3, 'sine'), 750) // C6
+  }
+
   const playError = () => {
     createTone(300, 0.3, 'sawtooth')
   }
@@ -122,6 +142,8 @@ export const SoundProvider = ({ children }) => {
     playHover,
     playClick,
     playSuccess,
+    playEpicSuccess,
+    playLegendarySuccess,
     playError,
     playNotification,
     playWhoosh

@@ -12,7 +12,7 @@ export const useAchievements = () => {
 }
 
 export const AchievementProvider = ({ children }) => {
-  const { playSuccess, playNotification } = useSound()
+  const { playSuccess, playEpicSuccess, playLegendarySuccess, playNotification } = useSound()
   const [achievements, setAchievements] = useState(() => {
     const saved = localStorage.getItem('portfolio-achievements')
     return saved ? JSON.parse(saved) : {}
@@ -24,84 +24,84 @@ export const AchievementProvider = ({ children }) => {
     'first-visit': {
       id: 'first-visit',
       title: '👋 Welcome Explorer!',
-      description: 'Visited the portfolio for the first time',
+      description: 'Your journey begins here, partner',
       icon: '🎉',
       points: 10
     },
     'section-explorer': {
       id: 'section-explorer',
       title: '🗺️ Section Explorer',
-      description: 'Visited all main sections',
+      description: 'Mapped out the entire territory',
       icon: '🧭',
       points: 25
     },
     'dark-mode-user': {
       id: 'dark-mode-user',
       title: '🌙 Night Owl',
-      description: 'Switched to dark mode',
+      description: 'Embraced the darkness within',
       icon: '🦉',
       points: 15
     },
     'sound-lover': {
       id: 'sound-lover',
       title: '🔊 Sound Enthusiast',
-      description: 'Enabled sound effects',
+      description: 'Tuned into the digital frequency',
       icon: '🎵',
       points: 15
     },
     'easter-egg-hunter': {
       id: 'easter-egg-hunter',
       title: '🥚 Easter Egg Hunter',
-      description: 'Found a secret easter egg',
+      description: 'Uncovered hidden secrets',
       icon: '🕵️',
       points: 50
     },
     'konami-master': {
       id: 'konami-master',
       title: '🎮 Konami Master',
-      description: 'Entered the legendary Konami code',
+      description: 'Unlocked the ancient code',
       icon: '👑',
       points: 100
     },
     'click-master': {
       id: 'click-master',
       title: '🖱️ Click Master',
-      description: 'Clicked 100 times',
+      description: 'Your trigger finger is legendary',
       icon: '⚡',
       points: 30
     },
     'scroll-champion': {
       id: 'scroll-champion',
       title: '📜 Scroll Champion',
-      description: 'Scrolled through the entire portfolio',
+      description: 'Reached the end of the trail',
       icon: '🏆',
       points: 20
     },
     'contact-initiator': {
       id: 'contact-initiator',
       title: '📧 Contact Initiator',
-      description: 'Opened the contact form',
+      description: 'Made the first move',
       icon: '💌',
       points: 25
     },
     'project-viewer': {
       id: 'project-viewer',
       title: '👀 Project Viewer',
-      description: 'Viewed project details',
+      description: 'Investigated the evidence',
       icon: '🔍',
       points: 15
     },
     'speed-reader': {
       id: 'speed-reader',
       title: '⚡ Speed Reader',
-      description: 'Spent less than 30 seconds on the site',
+      description: 'Quick on the draw',
       icon: '💨',
       points: 10
     },
     'dedicated-visitor': {
       id: 'dedicated-visitor',
       title: '⏰ Dedicated Visitor',
-      description: 'Spent more than 5 minutes exploring',
+      description: 'Set up camp and stayed a while',
       icon: '🎯',
       points: 40
     },
@@ -139,6 +139,48 @@ export const AchievementProvider = ({ children }) => {
       description: 'Unlocked all achievements',
       icon: '🌟',
       points: 200
+    },
+    'code-outlaw': {
+      id: 'code-outlaw',
+      title: '🤠 Code Outlaw',
+      description: 'Explored every corner of the portfolio frontier',
+      icon: '🏜️',
+      points: 45
+    },
+    'survivor': {
+      id: 'survivor',
+      title: '🧟 Survivor',
+      description: 'Made it through the entire portfolio journey',
+      icon: '🔦',
+      points: 50
+    },
+    'observer': {
+      id: 'observer',
+      title: '👁️ Observer',
+      description: 'Watched every section with keen interest',
+      icon: '🔍',
+      points: 35
+    },
+    'sharp-mind': {
+      id: 'sharp-mind',
+      title: '🎩 Sharp Mind',
+      description: 'Quickly navigated through complex sections',
+      icon: '⚡',
+      points: 40
+    },
+    'camp-visitor': {
+      id: 'camp-visitor',
+      title: '🏕️ Camp Visitor',
+      description: 'Settled in and explored thoroughly',
+      icon: '🔥',
+      points: 30
+    },
+    'infected-by-code': {
+      id: 'infected-by-code',
+      title: '🦠 Infected by Code',
+      description: 'Caught the programming bug',
+      icon: '💻',
+      points: 25
     }
   }
 
@@ -149,6 +191,8 @@ export const AchievementProvider = ({ children }) => {
   const [themeChanges, setThemeChanges] = useState(0)
   const [projectClicks, setProjectClicks] = useState(0)
   const [skillCategoriesViewed, setSkillCategoriesViewed] = useState(new Set())
+  const [totalInteractions, setTotalInteractions] = useState(0)
+  const [quickNavigations, setQuickNavigations] = useState(0)
 
   useEffect(() => {
     localStorage.setItem('portfolio-achievements', JSON.stringify(achievements))
@@ -160,12 +204,20 @@ export const AchievementProvider = ({ children }) => {
       unlockAchievement('first-visit')
     }
 
-    // Track clicks
+    // Track clicks and interactions
     const handleClick = () => {
       setClickCount(prev => {
         const newCount = prev + 1
         if (newCount >= 100 && !achievements['click-master']) {
           unlockAchievement('click-master')
+        }
+        return newCount
+      })
+
+      setTotalInteractions(prev => {
+        const newCount = prev + 1
+        if (newCount >= 50 && !achievements['infected-by-code']) {
+          unlockAchievement('infected-by-code')
         }
         return newCount
       })
@@ -179,13 +231,24 @@ export const AchievementProvider = ({ children }) => {
       }
     }
 
-    // Track visit duration
+    // Track visit duration and navigation patterns
     const checkVisitDuration = () => {
       const duration = Date.now() - visitStartTime
       if (duration < 30000 && !achievements['speed-reader']) {
         unlockAchievement('speed-reader')
+        setQuickNavigations(prev => prev + 1)
       } else if (duration > 300000 && !achievements['dedicated-visitor']) {
         unlockAchievement('dedicated-visitor')
+        if (!achievements['camp-visitor']) {
+          unlockAchievement('camp-visitor')
+        }
+      } else if (duration > 120000 && !achievements['survivor']) {
+        unlockAchievement('survivor')
+      }
+
+      // Sharp mind achievement for quick navigation
+      if (quickNavigations >= 3 && !achievements['sharp-mind']) {
+        unlockAchievement('sharp-mind')
       }
     }
 
@@ -235,7 +298,15 @@ export const AchievementProvider = ({ children }) => {
     }
 
     setNotifications(prev => [...prev, notification])
-    playSuccess()
+
+    // Play different sounds based on achievement tier
+    if (achievement.points >= 75) {
+      playLegendarySuccess() // Legendary achievements
+    } else if (achievement.points >= 30) {
+      playEpicSuccess() // Epic achievements
+    } else {
+      playSuccess() // Regular achievements
+    }
 
     // Remove notification after 6 seconds
     setTimeout(() => {
@@ -247,15 +318,25 @@ export const AchievementProvider = ({ children }) => {
     setVisitedSections(prev => {
       const newSet = new Set(prev)
       newSet.add(sectionId)
-      
+
       // Check if all main sections visited
       const mainSections = ['home', 'skills', 'projects', 'contact']
       const allVisited = mainSections.every(section => newSet.has(section))
-      
+
       if (allVisited && !achievements['section-explorer']) {
         unlockAchievement('section-explorer')
       }
-      
+
+      // Code outlaw achievement for exploring everything
+      if (newSet.size >= 4 && !achievements['code-outlaw']) {
+        unlockAchievement('code-outlaw')
+      }
+
+      // Observer achievement for watching sections
+      if (newSet.size >= 3 && !achievements['observer']) {
+        unlockAchievement('observer')
+      }
+
       return newSet
     })
   }
