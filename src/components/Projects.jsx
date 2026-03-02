@@ -6,31 +6,31 @@ import './Projects.css'
 
 const projectsData = [
   {
-    title: "Financial Dashboard",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
-    description: "A comprehensive financial management platform that helps users track expenses, visualize budgets, and analyze spending patterns in real time.",
-    frameworks: ["React", "Node.js", "Chart.js", "MongoDB"],
-    github: "https://github.com/therapistcat/financial-dashboard",
-    demo: "https://financial-dashboard-demo.vercel.app",
-    category: "Web Development"
+    title: "BreachBytes - Gamified Cybersecurity CTF Platform",
+    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
+    description: "Led end-to-end development of a Capture The Flag platform for 200+ participants with Next.js and Three.js frontend experiences and a Node.js backend for auth, scoring, and real-time progress tracking.",
+    frameworks: ["Next.js", "Three.js", "Node.js", "WebSockets"],
+    github: "https://github.com/therapistcat",
+    demo: "https://github.com/therapistcat",
+    category: "Cybersecurity"
   },
   {
-    title: "Smart Study Scheduler",
-    image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop",
-    description: "An intelligent study planner that helps students organize and optimize their study sessions using AI-powered scheduling algorithms.",
-    frameworks: ["React", "Flask", "MongoDB", "Python"],
-    github: "https://github.com/therapistcat/study-scheduler",
-    demo: "https://study-scheduler-demo.vercel.app",
-    category: "AI & Machine Learning"
+    title: "HealthCare+ - Full Stack MERN Application",
+    image: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=600&h=400&fit=crop",
+    description: "Designed a healthcare management system with role-based dashboards and JWT authentication, including appointment booking, medication tracking, and integrated notification workflows.",
+    frameworks: ["React", "Node.js", "Express.js", "MongoDB"],
+    github: "https://github.com/therapistcat",
+    demo: "https://github.com/therapistcat",
+    category: "Full-Stack MERN"
   },
   {
-    title: "Blockchain Voting System",
-    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop",
-    description: "A decentralized voting platform built on blockchain technology ensuring transparency, security, and immutable vote records.",
-    frameworks: ["React", "Solidity", "Web3.js", "Ethereum"],
-    github: "https://github.com/therapistcat/blockchain-voting",
-    demo: "https://blockchain-voting-demo.vercel.app",
-    category: "Blockchain"
+    title: "Mumbai Civic Portal - AI + Blockchain Civic Platform",
+    image: "https://images.unsplash.com/photo-1465447142348-e9952c393450?w=600&h=400&fit=crop",
+    description: "Engineered civic issue reporting using FastAPI, React, and MongoDB, integrated YOLOv8 object detection, geospatial heatmaps, priority ranking, and tamper-evident blockchain complaint anchoring.",
+    frameworks: ["FastAPI", "React", "MongoDB", "YOLOv8"],
+    github: "https://github.com/therapistcat",
+    demo: "https://github.com/therapistcat",
+    category: "AI + Blockchain"
   }
 ]
 
@@ -59,7 +59,7 @@ const Projects = () => {
             <span className="text-gradient"> Work</span>
           </h2>
           <p className="projects-subtitle">
-            A showcase of projects that demonstrate my skills in full-stack development, Blockchain, and modern web technologies.
+            A showcase of resume projects spanning cybersecurity platforms, full-stack MERN systems, and AI + blockchain civic technology.
           </p>
         </div>
 
@@ -165,7 +165,7 @@ const Projects = () => {
               Interested in working together?
             </h3>
             <p className="cta-text">
-              I'm always open to discussing new opportunities and exciting projects.
+              I'm open to internship, backend, and full-stack collaboration opportunities.
             </p>
             <MagneticEffect strength={0.3}>
               <AnimatedButton

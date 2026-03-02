@@ -91,7 +91,7 @@ const Contact = () => {
             <span className="text-gradient"> Together</span>
           </h2>
           <p className="contact-subtitle">
-            Have a project in mind? I'd love to hear about it. Send me a message and let's discuss how we can bring your ideas to life.
+            Open to internship and full-stack/backend opportunities. Reach out for project collaboration, hiring, or technical discussions.
           </p>
         </div>
 
@@ -130,7 +130,7 @@ const Contact = () => {
               </div>
               <div className="info-content">
                 <h3>Availability</h3>
-                <p>Available for freelance projects</p>
+                <p>Open to internships and opportunities</p>
               </div>
             </div>
 
@@ -197,7 +197,7 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   className={errors.subject ? 'error' : ''}
-                  placeholder="What's this about?"
+                  placeholder="Internship, project, or collaboration"
                 />
                 {errors.subject && <span className="error-message">{errors.subject}</span>}
               </div>
@@ -210,7 +210,7 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   className={errors.message ? 'error' : ''}
-                  placeholder="Tell me about your project..."
+                  placeholder="Share your opportunity or project details..."
                   rows="5"
                 />
                 {errors.message && <span className="error-message">{errors.message}</span>}

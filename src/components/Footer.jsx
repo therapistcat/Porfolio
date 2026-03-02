@@ -22,8 +22,8 @@ const Footer = () => {
           <div className="footer-brand">
             <h3 className="brand-title">Jivanshu Mishra</h3>
             <p className="brand-description">
-              Computer Engineering student passionate about creating innovative solutions
-              through full-stack development, Blockchain, and emerging technologies.
+              Computer Science undergraduate specializing in full-stack and backend development,
+              with experience in MERN, FastAPI, Next.js, YOLOv8, and blockchain systems.
             </p>
             <div className="social-links">
               <a href="https://github.com/therapistcat" target="_blank" rel="noopener noreferrer" className="social-link">
@@ -63,7 +63,7 @@ const Footer = () => {
           <div className="footer-contact">
             <h4 className="contact-title">Get In Touch</h4>
             <p className="contact-description">
-              Have feedback or ideas to make this portfolio better? I'd love to hear from you!
+              Open to internships, full-stack/backend roles, and high-impact engineering collaborations.
             </p>
             <div className="contact-info">
               <a href="mailto:mishrajivanshu02@gmail.com" className="contact-email">
@@ -73,7 +73,7 @@ const Footer = () => {
                 mishrajivanshu02@gmail.com
               </a>
               <div className="availability">
-                <span className="status-dot"></span> Available for opportunities
+                <span className="status-dot"></span> Open to internships and opportunities
               </div>
             </div>
           </div>
@@ -83,11 +83,11 @@ const Footer = () => {
         <div className="footer-bottom">
           <div className="footer-bottom-content">
             <div className="copyright">
-              © {currentYear} Jivanshu Mishra. All rights reserved.
+              (c) {currentYear} Jivanshu Mishra. All rights reserved.
             </div>
             <div className="tech-info">
               <span>Built with React & CSS</span>
-              <span>•</span>
+              <span>|</span>
               <span>Deployed on Render</span>
             </div>
           </div>

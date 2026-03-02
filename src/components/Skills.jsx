@@ -4,101 +4,101 @@ import './Skills.css'
 
 const skillCategories = [
   {
-    title: "Frontend Development",
+    title: "Programming Languages",
     skills: [
-      {
-        name: 'HTML5',
-        level: 90,
-        color: '#e34f26',
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
-        description: 'Semantic markup & accessibility'
-      },
-      {
-        name: 'CSS3',
-        level: 85,
-        color: '#1572b6',
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
-        description: 'Modern layouts & animations'
-      },
-      {
-        name: 'JavaScript',
-        level: 88,
-        color: '#f7df1e',
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
-        description: 'ES6+ & DOM manipulation'
-      },
-      {
-        name: 'React',
-        level: 85,
-        color: '#61dafb',
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-        description: 'Hooks, Context & Components'
-      }
-    ]
-  },
-  {
-    title: "Backend Development",
-    skills: [
-      {
-        name: 'Node.js',
-        level: 80,
-        color: '#339933',
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
-        description: 'Server-side JavaScript'
-      },
-      {
-        name: 'Express',
-        level: 75,
-        color: '#000000',
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
-        description: 'RESTful APIs & middleware'
-      },
       {
         name: 'Python',
-        level: 82,
+        level: 90,
         color: '#3776ab',
         icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
-        description: 'Flask, Django & automation'
+        description: 'Problem solving, scripting, and backend logic'
       },
       {
-        name: 'MongoDB',
-        level: 78,
-        color: '#47a248',
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
-        description: 'NoSQL database design'
-      }
-    ]
-  },
-  {
-    title: "Blockchain & Other",
-    skills: [
-      {
-        name: 'Solidity',
-        level: 70,
-        color: '#363636',
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/solidity/solidity-original.svg',
-        description: 'Smart contracts & DApps'
+        name: 'C',
+        level: 80,
+        color: '#a8b9cc',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg',
+        description: 'Core programming and memory fundamentals'
       },
       {
         name: 'C++',
-        level: 75,
+        level: 84,
         color: '#00599c',
         icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg',
-        description: 'System programming'
+        description: 'OOP and performance-oriented coding'
       },
       {
-        name: 'GraphQL',
-        level: 70,
-        color: '#e535ab',
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg',
-        description: 'Query language & APIs'
+        name: 'Java',
+        level: 82,
+        color: '#ed8b00',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
+        description: 'Object-oriented application development'
+      }
+    ]
+  },
+  {
+    title: "Frameworks",
+    skills: [
+      {
+        name: 'React',
+        level: 88,
+        color: '#61dafb',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+        description: 'Component-driven frontend architecture'
       },
       {
-        name: 'Git',
+        name: 'Node.js',
+        level: 86,
+        color: '#339933',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+        description: 'Backend services and APIs'
+      },
+      {
+        name: 'Express.js',
+        level: 84,
+        color: '#000000',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
+        description: 'REST APIs, middleware, and auth'
+      },
+      {
+        name: 'FastAPI',
+        level: 82,
+        color: '#009688',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg',
+        description: 'High-performance Python API development'
+      }
+    ]
+  },
+  {
+    title: "Databases & Concepts",
+    skills: [
+      {
+        name: 'MongoDB',
         level: 85,
-        color: '#f05032',
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
-        description: 'Version control & collaboration'
+        color: '#47a248',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+        description: 'NoSQL schema design and aggregation'
+      },
+      {
+        name: 'MySQL',
+        level: 80,
+        color: '#4479a1',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
+        description: 'Relational modeling and SQL querying'
+      },
+      {
+        name: 'PostgreSQL',
+        level: 78,
+        color: '#336791',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+        description: 'Advanced relational data management'
+      },
+      {
+        name: 'REST APIs',
+        level: 88,
+        color: '#85ea2d',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swagger/swagger-original.svg',
+        description: 'API design, JWT auth, and WebSockets'
       }
     ]
   }
@@ -126,10 +126,10 @@ const Skills = () => {
           </div>
           <h2 className="skills-title">
             Technologies I
-            <span className="text-gradient"> Master</span>
+            <span className="text-gradient"> Use in Production</span>
           </h2>
           <p className="skills-subtitle">
-            A comprehensive toolkit of modern technologies and frameworks that I use to build innovative solutions.
+            Core languages, frameworks, databases, and engineering concepts from my resume and project work.
           </p>
         </div>
 
@@ -204,21 +204,63 @@ const Skills = () => {
           <h3 className="tools-title">Tools & Technologies</h3>
           <div className="tools-grid">
             {[
-              { name: 'Docker', icon: '🐳' },
-              { name: 'AWS', icon: '☁️' },
-              { name: 'Firebase', icon: '🔥' },
-              { name: 'Figma', icon: '🎨' },
-              { name: 'VS Code', icon: '💻' },
-              { name: 'Postman', icon: '📮' },
-              { name: 'Linux', icon: '🐧' },
-              { name: 'Webpack', icon: '📦' }
+              {
+                name: 'JavaScript',
+                short: 'JS',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg'
+              },
+              {
+                name: 'Next.js',
+                short: 'N',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg'
+              },
+              {
+                name: 'Django',
+                short: 'D',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg'
+              },
+              {
+                name: 'Spring Boot',
+                short: 'SB',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg'
+              },
+              {
+                name: 'Flask',
+                short: 'F',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg'
+              },
+              {
+                name: 'Three.js',
+                short: '3D',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg'
+              },
+              {
+                name: 'Microservices',
+                short: 'MS',
+                icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg'
+              },
+              {
+                name: 'JWT Auth',
+                short: 'JWT',
+                icon: 'https://cdn.simpleicons.org/jsonwebtokens/ffffff'
+              }
             ].map((tool, index) => (
               <div
                 key={tool.name}
                 className="tool-item"
                 style={{ '--delay': `${index * 0.1}s` }}
               >
-                <span className="tool-icon">{tool.icon}</span>
+                <span className="tool-icon">
+                  <img
+                    src={tool.icon}
+                    alt={tool.name}
+                    className="tool-icon-img"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.parentElement.textContent = tool.short;
+                    }}
+                  />
+                </span>
                 <span className="tool-name">{tool.name}</span>
               </div>
             ))}

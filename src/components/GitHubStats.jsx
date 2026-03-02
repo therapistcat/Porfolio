@@ -1,135 +1,215 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useSound } from '../contexts/SoundContext'
 import './GitHubStats.css'
 
-const GitHubStats = ({ username = 'therapistcat' }) => {
+const DEFAULT_LEETCODE_TOTALS = {
+  easyTotal: 929,
+  mediumTotal: 2018,
+  hardTotal: 912,
+  totalQuestions: 3859
+}
+
+const numberOrZero = (value) => {
+  const parsed = Number.parseFloat(value)
+  return Number.isFinite(parsed) ? parsed : 0
+}
+
+const firstNumber = (source, keys, fallback = 0) => {
+  for (const key of keys) {
+    if (source?.[key] !== undefined && source?.[key] !== null) {
+      return numberOrZero(source[key])
+    }
+  }
+  return fallback
+}
+
+const normalizeLeetCodeUnofficial = (payload, fallbackTotals) => {
+  const easyTotal = firstNumber(payload, ['totalEasy', 'easyTotal'], fallbackTotals.easyTotal)
+  const mediumTotal = firstNumber(payload, ['totalMedium', 'mediumTotal'], fallbackTotals.mediumTotal)
+  const hardTotal = firstNumber(payload, ['totalHard', 'hardTotal'], fallbackTotals.hardTotal)
+
+  const derivedAll = easyTotal + mediumTotal + hardTotal
+  const totalQuestions = firstNumber(
+    payload,
+    ['totalQuestions', 'allQuestions', 'allQuestionsCount'],
+    derivedAll || fallbackTotals.totalQuestions
+  )
+
+  return {
+    totalSolved: firstNumber(payload, ['totalSolved', 'solvedQuestion'], 0),
+    easySolved: firstNumber(payload, ['easySolved'], 0),
+    mediumSolved: firstNumber(payload, ['mediumSolved'], 0),
+    hardSolved: firstNumber(payload, ['hardSolved'], 0),
+    easyTotal,
+    mediumTotal,
+    hardTotal,
+    totalQuestions,
+    ranking: firstNumber(payload, ['ranking'], 0),
+    acceptanceRate: firstNumber(payload, ['acceptanceRate'], 0)
+  }
+}
+
+const GitHubStats = ({
+  username = 'therapistcat',
+  leetcodeUsername = 'therapistcat69'
+}) => {
   const { playNotification } = useSound()
   const [stats, setStats] = useState({
-    repos: 0,
-    followers: 0,
-    following: 0,
-    stars: 0,
-    commits: 0,
-    languages: []
+    github: {
+      username,
+      profileUrl: `https://github.com/${username}`,
+      contributions: 0,
+      repos: 0,
+      followers: 0,
+      stars: 0
+    },
+    leetcode: {
+      username: leetcodeUsername,
+      profileUrl: `https://leetcode.com/u/${leetcodeUsername}/`,
+      totalSolved: 0,
+      easySolved: 0,
+      mediumSolved: 0,
+      hardSolved: 0,
+      ...DEFAULT_LEETCODE_TOTALS,
+      ranking: 0,
+      acceptanceRate: 0
+    },
+    fetchedAt: ''
   })
   const [isLoading, setIsLoading] = useState(true)
   const [isVisible, setIsVisible] = useState(false)
+  const [error, setError] = useState('')
 
   useEffect(() => {
-    // Simulate fetching GitHub stats (replace with real API calls)
-    const fetchGitHubStats = async () => {
+    const fetchData = async () => {
+      setIsLoading(true)
+      setError('')
+
+      let apiData = null
+      let unofficialLeetCode = null
+
       try {
-        setIsLoading(true)
-        
-        // Simulate API delay
-        await new Promise(resolve => setTimeout(resolve, 1500))
-        
-        // Mock data (replace with real GitHub API calls)
-        const mockStats = {
-          repos: 42,
-          followers: 156,
-          following: 89,
-          stars: 234,
-          commits: 1247,
-          languages: [
-            { name: 'JavaScript', percentage: 45, color: '#f7df1e' },
-            { name: 'Python', percentage: 25, color: '#3776ab' },
-            { name: 'React', percentage: 20, color: '#61dafb' },
-            { name: 'CSS', percentage: 10, color: '#1572b6' }
-          ]
+        const apiResponse = await fetch(
+          `/api/profile-stats?github=${encodeURIComponent(username)}&leetcode=${encodeURIComponent(leetcodeUsername)}`
+        )
+
+        if (apiResponse.ok) {
+          apiData = await apiResponse.json()
         }
-        
-        setStats(mockStats)
+      } catch (apiError) {
+        console.error('Portfolio API request failed:', apiError)
+      }
+
+      try {
+        const unofficialResponse = await fetch(
+          `https://leetcode-stats-api.herokuapp.com/${encodeURIComponent(leetcodeUsername)}`
+        )
+
+        if (unofficialResponse.ok) {
+          const payload = await unofficialResponse.json()
+          if (payload && payload.status !== 'error') {
+            const fallbackTotals = apiData?.leetcode || DEFAULT_LEETCODE_TOTALS
+            unofficialLeetCode = normalizeLeetCodeUnofficial(payload, fallbackTotals)
+          }
+        }
+      } catch (unofficialError) {
+        console.error('Unofficial LeetCode API request failed:', unofficialError)
+      }
+
+      if (!apiData && !unofficialLeetCode) {
+        setError('Unable to load live stats right now. Please try again in a moment.')
         setIsLoading(false)
-        setIsVisible(true)
-        playNotification()
-      } catch (error) {
-        console.error('Error fetching GitHub stats:', error)
-        setIsLoading(false)
+        return
+      }
+
+      const nextStats = {
+        github: {
+          username,
+          profileUrl: `https://github.com/${username}`,
+          contributions: apiData?.github?.contributions || 0,
+          repos: apiData?.github?.repos || 0,
+          followers: apiData?.github?.followers || 0,
+          stars: apiData?.github?.stars || 0
+        },
+        leetcode: {
+          username: leetcodeUsername,
+          profileUrl: `https://leetcode.com/u/${leetcodeUsername}/`,
+          totalSolved: apiData?.leetcode?.totalSolved || 0,
+          easySolved: apiData?.leetcode?.easySolved || 0,
+          mediumSolved: apiData?.leetcode?.mediumSolved || 0,
+          hardSolved: apiData?.leetcode?.hardSolved || 0,
+          easyTotal: apiData?.leetcode?.easyTotal || DEFAULT_LEETCODE_TOTALS.easyTotal,
+          mediumTotal: apiData?.leetcode?.mediumTotal || DEFAULT_LEETCODE_TOTALS.mediumTotal,
+          hardTotal: apiData?.leetcode?.hardTotal || DEFAULT_LEETCODE_TOTALS.hardTotal,
+          totalQuestions: apiData?.leetcode?.totalQuestions || DEFAULT_LEETCODE_TOTALS.totalQuestions,
+          ranking: apiData?.leetcode?.ranking || 0,
+          acceptanceRate: apiData?.leetcode?.acceptanceRate || 0
+        },
+        fetchedAt: apiData?.fetchedAt || new Date().toISOString()
+      }
+
+      if (unofficialLeetCode) {
+        nextStats.leetcode = {
+          ...nextStats.leetcode,
+          ...unofficialLeetCode
+        }
+      }
+
+      setStats(nextStats)
+      setIsVisible(true)
+      playNotification()
+      setIsLoading(false)
+    }
+
+    fetchData()
+  }, [username, leetcodeUsername, playNotification])
+
+  const ringMetrics = useMemo(() => {
+    const ringRadius = 108
+    const circumference = 2 * Math.PI * ringRadius
+    const easySolved = Math.max(0, numberOrZero(stats.leetcode.easySolved))
+    const mediumSolved = Math.max(0, numberOrZero(stats.leetcode.mediumSolved))
+    const hardSolved = Math.max(0, numberOrZero(stats.leetcode.hardSolved))
+    const solvedTotal = Math.max(0, easySolved + mediumSolved + hardSolved)
+
+    if (solvedTotal <= 0) {
+      return {
+        ringRadius,
+        circumference,
+        easyArcLength: 0,
+        mediumArcLength: 0,
+        hardArcLength: 0,
+        easyOffset: 0,
+        mediumOffset: 0,
+        hardOffset: 0
       }
     }
 
-    fetchGitHubStats()
-  }, [username, playNotification])
+    const segmentGap = 10
+    const totalGap = segmentGap * 3
+    const drawableLength = Math.max(0, circumference - totalGap)
 
-  const StatCard = ({ icon, label, value, delay = 0 }) => (
-    <div 
-      className="stat-card"
-      style={{ '--delay': `${delay}s` }}
-    >
-      <div className="stat-icon">
-        {icon}
-      </div>
-      <div className="stat-content">
-        <div className="stat-value">
-          <AnimatedNumber value={value} />
-        </div>
-        <div className="stat-label">{label}</div>
-      </div>
-    </div>
-  )
+    const easyArcLength = (easySolved / solvedTotal) * drawableLength
+    const mediumArcLength = (mediumSolved / solvedTotal) * drawableLength
+    const hardArcLength = (hardSolved / solvedTotal) * drawableLength
 
-  const AnimatedNumber = ({ value }) => {
-    const [displayValue, setDisplayValue] = useState(0)
-
-    useEffect(() => {
-      if (!isVisible) return
-
-      const duration = 2000
-      const steps = 60
-      const increment = value / steps
-      let current = 0
-
-      const timer = setInterval(() => {
-        current += increment
-        if (current >= value) {
-          setDisplayValue(value)
-          clearInterval(timer)
-        } else {
-          setDisplayValue(Math.floor(current))
-        }
-      }, duration / steps)
-
-      return () => clearInterval(timer)
-    }, [value, isVisible])
-
-    return <span>{displayValue.toLocaleString()}</span>
-  }
-
-  const LanguageBar = ({ language, delay = 0 }) => (
-    <div 
-      className="language-bar"
-      style={{ '--delay': `${delay}s` }}
-    >
-      <div className="language-info">
-        <span className="language-name">{language.name}</span>
-        <span className="language-percentage">{language.percentage}%</span>
-      </div>
-      <div className="language-progress">
-        <div 
-          className="language-fill"
-          style={{ 
-            '--percentage': `${language.percentage}%`,
-            '--color': language.color
-          }}
-        />
-      </div>
-    </div>
-  )
+    return {
+      ringRadius,
+      circumference,
+      easyArcLength,
+      mediumArcLength,
+      hardArcLength,
+      easyOffset: 0,
+      mediumOffset: -(easyArcLength + segmentGap),
+      hardOffset: -(easyArcLength + segmentGap + mediumArcLength + segmentGap)
+    }
+  }, [stats.leetcode])
 
   if (isLoading) {
     return (
       <div className="github-stats loading">
         <div className="stats-header">
-          <h3>📊 Loading GitHub Stats...</h3>
-        </div>
-        <div className="loading-animation">
-          <div className="loading-bar"></div>
-          <div className="loading-dots">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+          <h3>Loading coding charts...</h3>
         </div>
       </div>
     )
@@ -139,66 +219,118 @@ const GitHubStats = ({ username = 'therapistcat' }) => {
     <div className={`github-stats ${isVisible ? 'visible' : ''}`}>
       <div className="stats-header">
         <div className="stats-title">
-          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-          <h3>GitHub Activity</h3>
+          <h3>Coding Profiles</h3>
         </div>
-        <div className="stats-subtitle">Live coding statistics</div>
+        <div className="stats-subtitle">Live GitHub contribution chart and LeetCode solved stats</div>
+        {error ? <div className="stats-error">{error}</div> : null}
       </div>
 
-      <div className="stats-grid">
-        <StatCard
-          icon={<span>📁</span>}
-          label="Repositories"
-          value={stats.repos}
-          delay={0.1}
-        />
-        <StatCard
-          icon={<span>👥</span>}
-          label="Followers"
-          value={stats.followers}
-          delay={0.2}
-        />
-        <StatCard
-          icon={<span>⭐</span>}
-          label="Stars"
-          value={stats.stars}
-          delay={0.3}
-        />
-        <StatCard
-          icon={<span>💻</span>}
-          label="Commits"
-          value={stats.commits}
-          delay={0.4}
-        />
-      </div>
+      <div className="charts-grid">
+        <article className="chart-panel github-panel">
+          <div className="panel-header">
+            <h4>{stats.github.contributions.toLocaleString()} contributions in the last year</h4>
+            <a href={stats.github.profileUrl} target="_blank" rel="noopener noreferrer">@{stats.github.username}</a>
+          </div>
 
-      <div className="languages-section">
-        <h4>Most Used Languages</h4>
-        <div className="languages-list">
-          {stats.languages.map((language, index) => (
-            <LanguageBar
-              key={language.name}
-              language={language}
-              delay={0.5 + index * 0.1}
+          <div className="heatmap-wrap">
+            <img
+              src={`https://ghchart.rshah.org/${stats.github.username}`}
+              alt={`${stats.github.username} GitHub contribution chart`}
+              className="heatmap-image"
+              loading="lazy"
             />
-          ))}
-        </div>
-      </div>
+          </div>
 
-      <div className="stats-footer">
-        <div className="last-updated">
-          <span>🔄 Updated just now</span>
-        </div>
-        <a 
-          href={`https://github.com/${username}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="github-link"
-        >
-          View on GitHub →
-        </a>
+          <div className="github-meta">
+            <div className="meta-card">
+              <span>Repos</span>
+              <strong>{stats.github.repos}</strong>
+            </div>
+            <div className="meta-card">
+              <span>Followers</span>
+              <strong>{stats.github.followers}</strong>
+            </div>
+            <div className="meta-card">
+              <span>Stars</span>
+              <strong>{stats.github.stars}</strong>
+            </div>
+          </div>
+        </article>
+
+        <article className="chart-panel leetcode-panel">
+          <div className="panel-header">
+            <h4>LeetCode Progress</h4>
+            <a href={stats.leetcode.profileUrl} target="_blank" rel="noopener noreferrer">@{stats.leetcode.username}</a>
+          </div>
+
+          <div className="leetcode-layout">
+            <div className="leetcode-ring">
+              <svg className="leetcode-ring-svg" viewBox="0 0 240 240" aria-hidden="true">
+                <circle className="ring-track" cx="120" cy="120" r={ringMetrics.ringRadius} />
+                <circle
+                  className="ring-arc ring-arc-medium"
+                  cx="120"
+                  cy="120"
+                  r={ringMetrics.ringRadius}
+                  style={{
+                    strokeDasharray: `${ringMetrics.mediumArcLength} ${ringMetrics.circumference}`,
+                    strokeDashoffset: ringMetrics.mediumOffset
+                  }}
+                />
+                <circle
+                  className="ring-arc ring-arc-easy"
+                  cx="120"
+                  cy="120"
+                  r={ringMetrics.ringRadius}
+                  style={{
+                    strokeDasharray: `${ringMetrics.easyArcLength} ${ringMetrics.circumference}`,
+                    strokeDashoffset: ringMetrics.easyOffset
+                  }}
+                />
+                <circle
+                  className="ring-arc ring-arc-hard"
+                  cx="120"
+                  cy="120"
+                  r={ringMetrics.ringRadius}
+                  style={{
+                    strokeDasharray: `${ringMetrics.hardArcLength} ${ringMetrics.circumference}`,
+                    strokeDashoffset: ringMetrics.hardOffset
+                  }}
+                />
+              </svg>
+              <div className="leetcode-ring-inner">
+                <div className="leetcode-total">
+                  {stats.leetcode.totalSolved}
+                  <span>/{stats.leetcode.totalQuestions}</span>
+                </div>
+                <div className="leetcode-solved-label">Solved</div>
+                <div className="leetcode-extra">
+                  Rank: {stats.leetcode.ranking ? stats.leetcode.ranking.toLocaleString() : '-'}
+                </div>
+              </div>
+            </div>
+
+            <div className="difficulty-stack">
+              <div className="difficulty-card easy">
+                <span>Easy</span>
+                <strong>{stats.leetcode.easySolved}/{stats.leetcode.easyTotal}</strong>
+              </div>
+              <div className="difficulty-card medium">
+                <span>Med.</span>
+                <strong>{stats.leetcode.mediumSolved}/{stats.leetcode.mediumTotal}</strong>
+              </div>
+              <div className="difficulty-card hard">
+                <span>Hard</span>
+                <strong>{stats.leetcode.hardSolved}/{stats.leetcode.hardTotal}</strong>
+              </div>
+            </div>
+          </div>
+
+          <div className="leetcode-footer">
+            <span>Acceptance Rate: {stats.leetcode.acceptanceRate ? `${stats.leetcode.acceptanceRate}%` : '-'}</span>
+            <span>Updated: {new Date(stats.fetchedAt).toLocaleString()}</span>
+          </div>
+        </article>
       </div>
     </div>
   )
